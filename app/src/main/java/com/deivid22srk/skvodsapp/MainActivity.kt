@@ -26,6 +26,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -96,7 +97,7 @@ fun MainScreen() {
 
 @Composable
 fun HomeScreenContent(viewModel: HomeViewModel = viewModel()) {
-    val uiState by viewModel.uiState
+    val uiState by viewModel.uiState.collectAsState()
 
     when (val state = uiState) {
         is UiState.Loading -> {
