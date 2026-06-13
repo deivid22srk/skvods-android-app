@@ -10,14 +10,14 @@ import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
 
 interface SkvodsApi {
+    @GET("data/now_live.json")
+    suspend fun getNowLive(): retrofit2.Response<JsonElement>
+
+    @GET("data/storage.json")
+    suspend fun getStorage(): retrofit2.Response<JsonElement>
+
     @GET("api/{path}")
     suspend fun getApiData(@Path("path", encoded = true) path: String): retrofit2.Response<JsonElement>
-
-    @GET("data/{path}")
-    suspend fun getData(@Path("path", encoded = true) path: String): retrofit2.Response<JsonElement>
-
-    @GET("test_streams/{path}")
-    suspend fun getStreamMeta(@Path("path", encoded = true) path: String): retrofit2.Response<JsonElement>
 }
 
 object ApiClient {
