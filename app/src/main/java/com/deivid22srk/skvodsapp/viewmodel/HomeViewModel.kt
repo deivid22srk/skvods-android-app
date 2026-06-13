@@ -26,7 +26,8 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             try {
-                val response = ApiClient.api.getNowLive()
+                // Fetch the main video list just like the web proxy does
+                val response = ApiClient.api.getVideoList(limit = 20, page = 1)
                 if (response.isSuccessful && response.body() != null) {
                     _uiState.value = UiState.Success(response.body()!!)
                 } else {

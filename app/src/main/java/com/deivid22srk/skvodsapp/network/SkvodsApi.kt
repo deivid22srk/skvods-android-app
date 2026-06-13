@@ -9,15 +9,20 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
 
+import retrofit2.http.Query
+
 interface SkvodsApi {
+    @GET("api/list")
+    suspend fun getVideoList(
+        @Query("limit") limit: Int = 20,
+        @Query("page") page: Int = 1
+    ): retrofit2.Response<JsonElement>
+
     @GET("data/now_live.json")
     suspend fun getNowLive(): retrofit2.Response<JsonElement>
 
     @GET("data/storage.json")
     suspend fun getStorage(): retrofit2.Response<JsonElement>
-
-    @GET("api/{path}")
-    suspend fun getApiData(@Path("path", encoded = true) path: String): retrofit2.Response<JsonElement>
 }
 
 object ApiClient {
